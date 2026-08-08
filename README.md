@@ -24,6 +24,7 @@ wiring is:
 |17|A4
 |18-25|Ground
 
+<pre>
 testing found a speed of approx 1900-2000 bytes per second (somewhat on par with 19200 serial)
 i believe that the arduino end is the bottleneck currently, next steps would be to try a faster board like a pi pico
 the transfer protocol isnt the greatest, but it seems very reliable at least, it does need a bidirectional capable port in this state
@@ -38,3 +39,4 @@ lpttransfer.py is the program to dice a file up and send it to the arduino
 transfer.bas is an older proof of concept c:/dos/qbasic version for testing, i'm not entirely sure if it still works
 file2.cpp is the dos program, source
 FILE3.EXE is file2.cpp, compiled using borland cpp 3.1
+</pre>
