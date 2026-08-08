@@ -1,6 +1,8 @@
 # arduino2lpt
 file transfer program from a modern computer to a dos computer with a parallel port using an arduino as a middle man
 
+i highly encourage anyone to make changes, i know there is a lot of speed being left on the table
+
 wiring is:
 
 |db25|arduino|
@@ -27,7 +29,10 @@ wiring is:
 <pre>
 testing found a speed of approx 1900-2000 bytes per second (somewhat on par with 19200 serial)
 i believe that the arduino end is the bottleneck currently, next steps would be to try a faster board like a pi pico
-the transfer protocol isnt the greatest, but it seems very reliable at least, it does need a bidirectional capable port in this state
+the transfer protocol isnt the greatest, but it seems very reliable at least, i havent had any corruption that i'm aware of so far...
+you will need to reset the arduino and wait 5s for the data bus to stabilise before running the dos side listener, as there is no crc whatsoever currently, so any noise on the db25 gets read without a second thought
+it does need a bidirectional capable port in this state, i hope to add alternate modes in the future
+at this time the arduino sets data bits, sets a ready pin, dos sees the ready pin, reads byte, sets a ready pin itself, arduino reads dos ready pin, drops its own ready, clears data bus and both sides do their thing to prepare for the next packet
 
 i am on a toshiba 386 laptop
 IF YOU DONT HAVE A TOSHIBA LAPTOP THIS WILL NOT WORK OUT OF THE BOX
