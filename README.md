@@ -3,25 +3,26 @@ file transfer program from a modern computer to a dos computer with a parallel p
 
 wiring is:
 
-db25  arduino
-1     D2
-2     D3
-3     D4
-4     D5
-5     D6
-6     D7
-7     D8
-8     D9
-9     D10
-10    D11
-11    D12
-12    D13
-13    A0
-14    A1
-15    A2
-16    A3
-17    A4
-18-25 Ground
+|db25|arduino|
+|-----|--------|
+|1|D2
+|2|D3
+|3|D4
+|4|D5
+|5|D6
+|6|D7
+|7|D8
+|8|D9
+|9|D10
+|10|D11
+|11|D12
+|12|D13
+|13|A0
+|14|A1
+|15|A2
+|16|A3
+|17|A4
+|18-25|Ground
 
 testing found a speed of approx 1900-2000 bytes per second (somewhat on par with 19200 serial)
 i believe that the arduino end is the bottleneck currently, next steps would be to try a faster board like a pi pico
