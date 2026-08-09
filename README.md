@@ -40,7 +40,7 @@ also be aware of possible inverted output on db25 pin 1 (arduino pin D2)
 
 lpt.ino is the arduino sketch, i personally used a 5v arduino pro mini
 lpttransfer.py is the program to dice a file up and send it to the arduino
-transfer.bas is for hand typing into c:/dos/qbasic if you cannot get the exe transferred in another way, reset the arduino and wait a moment before beginning transfer for best chance of success
+transfer.bas is for hand typing into c:/dos/qbasic if you cannot get the exe transferred in another way, the hardcoded size value matches 8bitbi.exe reset the arduino and wait a moment before beginning transfer for best chance of success
 8bitbi.cpp is the dos program, source
 8bitbi.exe is 8bitbi.cpp, compiled using borland cpp 3.1
 </pre>
