@@ -44,3 +44,12 @@ transfer.bas is for hand typing into c:/dos/qbasic if you cannot get the exe tra
 8bitbi.cpp is the dos program, source
 8bitbi.exe is 8bitbi.cpp, compiled using borland cpp 3.1
 </pre>
+
+
+<pre>
+roadmap:
+  more transfer modes, specifically a 12 bit mode, 4 bit unidirectional compatible mode, and perhaps try talking to existing dos/win apps like interlink
+  upload to pc capability
+  dos side file picker, python sends a directory listing of a specified folder, dos side allows you to browse and request files, would just trigger the python to start transferring and hand off to the self contained transfer mode
+  part of that includes multi file queuing, and/or automatic file/folder compression, transmission, and extraction
+</pre> 
