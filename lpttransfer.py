@@ -29,21 +29,22 @@ def build_header(filepath, filesize, crc):
 
 def fmt_size(n):
     unit = 1024 if BINARY_UNITS else 1000
-    label = "iB" if BINARY_UNITS else "B"
     if n < 10000:
         return f"{n} B"
     elif n < 10000 * unit:
-        return f"{n/unit:.2f} K{label}"
+        label = "KiB" if BINARY_UNITS else "kB"
+        return f"{n/unit:.2f} {label}"
     else:
-        return f"{n/(unit*unit):.2f} M{label}"
+        label = "MiB" if BINARY_UNITS else "MB"
+        return f"{n/(unit*unit):.2f} {label}"
 
 def fmt_speed(bps):
     unit = 1024 if BINARY_UNITS else 1000
-    label = "iB" if BINARY_UNITS else "B"
     if bps < 1000:
-        return f"{bps:.0f} {label}/s"
+        return f"{bps:.0f} B/s"
     else:
-        return f"{bps/unit:.2f} K{label}/s"
+        label = "KiB/s" if BINARY_UNITS else "kB/s"
+        return f"{bps/unit:.2f} {label}"
 
 def draw_progress(sent, total, start_time):
     width = 30
@@ -75,8 +76,8 @@ def main():
     stream += b'\x00' * pad_len
 
     print(f"File: {os.path.basename(filepath)}  {fmt_size(filesize)}  CRC32: {crc:08X}")
-    print(f"Sync+header: {len(SYNC_WORD)+len(header)} bytes, pad: {pad_len} bytes, "
-          f"total stream: {len(stream)} bytes ({len(stream)//CHUNK} chunks)")
+    print(f"header: {len(SYNC_WORD)+len(header)}, [file: {filesize}], "
+          f"padding: {pad_len}, total {len(stream)} bytes ({len(stream)//CHUNK})")
 
     ser = serial.Serial()
     ser.port = PORT
