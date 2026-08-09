@@ -1,26 +1,30 @@
 OUT &H37A, &H80
-OPEN "recieved.txt" FOR BINARY AS #1
-
+DIM t AS INTEGER
 DIM size AS LONG
-DIM c AS STRING * 1
-DIM b(3) AS INTEGER
+size = 37030
 
-FOR i = 0 TO 3
+DO
   DO WHILE (INP(&H379) AND &H40) = 0
   LOOP
-  b(i) = INP(&H378)
-  PRINT "Header byte "; i; ": "; HEX$(b(i))
+  t = INP(&H378)
+  OUT &H37A, &H81
+  DO WHILE (INP(&H379) AND &H40) <> 0
+  LOOP
+  OUT &H37A, &H80
+LOOP WHILE t <> &H90
+
+FOR i = 0 TO 63
+  DO WHILE (INP(&H379) AND &H40) = 0
+  LOOP
+  t = INP(&H378)
   OUT &H37A, &H81
   DO WHILE (INP(&H379) AND &H40) <> 0
   LOOP
   OUT &H37A, &H80
 NEXT i
-size = CVL(CHR$(b(0)) + CHR$(b(1)) + CHR$(b(2)) + CHR$(b(3)))
-PRINT "Size: "; size
 
-startTime! = TIMER
-lastPrint! = TIMER
-
+OPEN "RECIEVED.EXE" FOR BINARY AS #1
+DIM c AS STRING * 1
 FOR i = 0 TO size - 1
   DO WHILE (INP(&H379) AND &H40) = 0
   LOOP
@@ -31,19 +35,6 @@ FOR i = 0 TO size - 1
   DO WHILE (INP(&H379) AND &H40) <> 0
   LOOP
   OUT &H37A, &H80
-  IF TIMER - lastPrint! >= 2 THEN
-  PRINT "Recieved "; i + 1; " / "; size; " bytes"
-  lastPrint! = TIMER
-  END IF
-
 NEXT i
-
 CLOSE #1
-
-PRINT "Complete: "; size; " bytes"; r
-elapsed! = TIMER - startTime!
-PRINT "Speed: "; INT((i + 1) / elapsed!); " bytes/sec"
-
-
-
-
+PRINT "Complete"
