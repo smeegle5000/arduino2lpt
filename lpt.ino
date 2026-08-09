@@ -1,16 +1,12 @@
-#define READY_BIT 3
-#define ACK_BIT   2
-#define CHUNK 32
-
-uint32_t totalSize = 0;
-uint32_t sentCount = 0;
+#define READY_BIT 3   // PORTB bit3 = D11
+#define ACK_BIT   2   // PORTD bit2 = D2
+#define CHUNK 512
 
 void setup() {
-  delay(5000);
   Serial.begin(250000);
-  DDRD |= 0xF8;
-  DDRB |= 0x0F;
-  PORTB &= ~(1 << READY_BIT);
+  DDRD |= 0xF8;                // D3-D7 output
+  DDRB |= 0x0F;                // D8-D11 output
+  PORTB &= ~(1 << READY_BIT);  // READY low
 }
 
 void sendByte(byte value) {
@@ -32,27 +28,8 @@ void readBlock(byte *buf, int n) {
 }
 
 void loop() {
-  static byte hdr[4];
   static byte buf[CHUNK];
-  static bool gotHeader = false;
-
-  if (!gotHeader) {
-    readBlock(hdr, 4);
-    totalSize = (uint32_t)hdr[0] | ((uint32_t)hdr[1] << 8) |
-                ((uint32_t)hdr[2] << 16) | ((uint32_t)hdr[3] << 24);
-    for (int i = 0; i < 4; i++) sendByte(hdr[i]);
-    Serial.write(1);
-    gotHeader = true;
-    return;
-  }
-
   readBlock(buf, CHUNK);
-  for (int i = 0; i < CHUNK; i++) {
-    if (sentCount < totalSize) {
-      sendByte(buf[i]);
-      sentCount++;
-    }
-    // else: padding byte, drained from serial, never sent over parallel
-  }
+  for (int i = 0; i < CHUNK; i++) sendByte(buf[i]);
   Serial.write(1);
 }
