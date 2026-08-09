@@ -51,5 +51,7 @@ roadmap:
   more transfer modes, specifically a 12 bit mode, 4 bit unidirectional compatible mode, and perhaps try talking to existing dos/win apps like interlink
   upload to pc capability
   dos side file picker, python sends a directory listing of a specified folder, dos side allows you to browse and request files, would just trigger the python to start transferring and hand off to the self contained transfer mode
-  part of that includes multi file queuing, and/or automatic file/folder compression, transmission, and extraction
+  part of that includes multi file queuing, and/or automatic file/folder compression, transmission, and extraction, ideally all done outside of the transfer exe
+  lpt port tester (prints out pin states and allows manual pin toggling for debugging)
+  change the active registers with a setting so the whole lot doesnt have to be recompiled because toshiba wants to be special with a non-standard control bit
 </pre> 
