@@ -27,10 +27,9 @@ wiring is:
 |18-25|Ground
 
 <pre>
-testing found a speed of approx 1900-2000 bytes per second (somewhat on par with 19200 serial)
+testing found a speed of approx 10600 bytes per second
 i believe that the arduino end is the bottleneck currently, next steps would be to try a faster board like a pi pico
-the transfer protocol isnt the greatest, but it seems very reliable at least, i havent had any corruption that i'm aware of so far...
-you will need to reset the arduino and wait 5s for the data bus to stabilise before running the dos side listener, as there is no crc whatsoever currently, so any noise on the db25 gets read without a second thought
+the transfer protocol isnt the greatest, but it seems very reliable at least.
 it does need a bidirectional capable port in this state, i hope to add alternate modes in the future
 at this time the arduino sets data bits, sets a ready pin, dos sees the ready pin, reads byte, sets a ready pin itself, arduino reads dos ready pin, drops its own ready, clears data bus and both sides do their thing to prepare for the next packet
 
@@ -39,9 +38,9 @@ IF YOU DONT HAVE A TOSHIBA LAPTOP THIS WILL NOT WORK OUT OF THE BOX
 my toshiba uses bit 7 of the control reg (0x37A 80) to enable bidirectional mode on the lpt port, most other computers apparently use bit 5 (0x37A 20), this will need to be updated in one of the files before using
 also be aware of possible inverted output on db25 pin 1 (arduino pin D2)
 
-lpt.ino is the arduino sketch, i personally used a pro mini
+lpt.ino is the arduino sketch, i personally used a 5v arduino pro mini
 lpttransfer.py is the program to dice a file up and send it to the arduino
 transfer.bas is an older proof of concept c:/dos/qbasic version for testing, i'm not entirely sure if it still works
-file2.cpp is the dos program, source
-FILE3.EXE is file2.cpp, compiled using borland cpp 3.1
+8bitbi.cpp is the dos program, source
+8bitbi.exe is 8bitbi.cpp, compiled using borland cpp 3.1
 </pre>
