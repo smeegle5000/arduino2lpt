@@ -27,7 +27,7 @@ wiring is:
 |18-25|Ground
 
 <pre>
-testing found a speed of approx 10600 bytes per second
+testing found a speed of approx 10600 bytes per second on a pro mini, 230000 bytes per second on an uno r4 minima
 i believe that the arduino end is the bottleneck currently, next steps would be to try a faster board like a pi pico
 the transfer protocol isnt the greatest, but it seems very reliable at least.
 it does need a bidirectional capable port in this state, i hope to add alternate modes in the future
@@ -49,6 +49,7 @@ transfer.bas is for hand typing into c:/dos/qbasic if you cannot get the exe tra
 <pre>
 roadmap:
   more transfer modes, specifically a 12 bit mode, 4 bit unidirectional compatible mode, and perhaps try talking to existing dos/win apps like interlink, (Parallel Line Internet Protocol?)
+  file chunking so one bad bit doesnt ruin a large transfer, speed throttling if it gets bad enough, as i found the higher speed on the newer arduino to cause some crc mismatches on large files, this may not be actually needed in the long run
   upload to pc capability
   dos side file picker, python sends a directory listing of a specified folder, dos side allows you to browse and request files, would just trigger the python to start transferring and hand off to the self contained transfer mode
   part of that includes multi file queuing, and/or automatic file/folder compression, transmission, and extraction, ideally all done outside of the transfer exe
